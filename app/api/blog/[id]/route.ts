@@ -7,9 +7,8 @@ interface Context {
   params: { id: string };
 }
 
-export async function GET(request: Request, context: Context) {
-  const { params } = context; // Destructure params from the context
-  const { id } = params;
+export async function GET(request: Request) {
+  const id = "8";
 
   try {
     const numericId = parseInt(id, 10);

@@ -21,7 +21,7 @@ export async function GET() {
           postDate: now,
         },
       });
-  
+      console.log(blog.id);
       return NextResponse.json({
         message: "New blog is added successfully",
       });

@@ -14,6 +14,7 @@ export function CreateBlog() {
         title,
         content,
       });
+      console.log(response);
       
       alert("Blog added Sucessfully");
       router.push('/')

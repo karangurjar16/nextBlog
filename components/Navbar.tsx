@@ -1,6 +1,6 @@
 
 export function Navbar(){
-    return <nav className="bg-white border-8 border-gray-200 rounded-lg p-4 ">
+    return <nav className="bg-white border-8border-gray-200 rounded-lg p-4 ">
     <div className="container mx-auto flex justify-between items-center">
       <a href="/" className="text-black text-2xl font-bold">
         MyBlog

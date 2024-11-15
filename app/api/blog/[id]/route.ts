@@ -1,30 +1,36 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
+
 const client = new PrismaClient();
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
-  
-    try {
-      const numericId = parseInt(id, 10);
-  
-      if (isNaN(numericId)) {
-        return NextResponse.json({ error: 'Invalid ID format, must be a number' }, { status: 400 });
-      }
-  
-      const blog = await client.blog.findUnique({
-        where: {
-          id: numericId,
-        },
-      });
-  
-      if (!blog) {
-        return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
-      }
-  
-      return NextResponse.json(blog);
-    } catch (error) {
-      console.error('Error fetching blog by ID:', error);
-      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+interface Context {
+  params: { id: string };
+}
+
+export async function GET(request: Request, context: Context) {
+  const { params } = context; // Destructure params from the context
+  const { id } = params;
+
+  try {
+    const numericId = parseInt(id, 10);
+
+    if (isNaN(numericId)) {
+      return NextResponse.json({ error: 'Invalid ID format, must be a number' }, { status: 400 });
     }
+
+    const blog = await client.blog.findUnique({
+      where: {
+        id: numericId,
+      },
+    });
+
+    if (!blog) {
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(blog);
+  } catch (error) {
+    console.error('Error fetching blog by ID:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
+}
